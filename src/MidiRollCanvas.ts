@@ -1,11 +1,11 @@
 import { MidiCanvas } from './MidiCanvas'
 
+/// Draws midi data as
 export class MidiRollCanvas implements MidiCanvas {
 	time: number;
 	ticks_per_beat: number;
 	minNote: number;
 	maxNote: number;
-
 
 	canvas: HTMLCanvasElement;
 	graphics: CanvasRenderingContext2D;
@@ -15,6 +15,7 @@ export class MidiRollCanvas implements MidiCanvas {
 		this.graphics = canvas.getContext("2d")
 		this.minNote = 0;
 		this.maxNote = 8;
+		this.time = 0;
 	}
 
 	beginFrame() {
@@ -24,15 +25,16 @@ export class MidiRollCanvas implements MidiCanvas {
 
 	endFrame() {
 		// Nothing to do
+		this.drawBeatGrid()
 	}
 
-	drawMeasure(start, end) {
+	drawMeasure(start, end, beatsPerMeasure) {
 		this.graphics.beginPath()
 
 		let startX = this.getX(start)
 		let endX   = this.getX(end)
 
-		let measureWidth = this.getW(this.ticks_per_beat);
+		let measureWidth = this.getW(beatsPerMeasure);
 		for(let x = startX; x < endX; x += measureWidth) {
 			this.graphics.moveTo(x, 0);
 			this.graphics.lineTo(x, this.canvas.height)
@@ -51,12 +53,12 @@ export class MidiRollCanvas implements MidiCanvas {
 		);
 	}
 
-	clear() {
+	private clear() {
 		this.graphics.fillStyle = "black";
 		this.graphics.fillRect(0, 0, 1000, 1000)
 	}
 
-	drawNoteGrid() {
+	private drawNoteGrid() {
 		this.graphics.beginPath()
 		for(let i = this.minNote; i <= this.maxNote; i++) {
 			let y = this.getY(i);
@@ -68,10 +70,10 @@ export class MidiRollCanvas implements MidiCanvas {
 		this.graphics.stroke()
 	}
 
-	drawBeatGrid() {
+	private drawBeatGrid() {
 		this.graphics.beginPath()
-		let beatWidth = this.getW(1/4);
-		for(let x = 0; x < this.canvas.width; x += beatWidth) {
+		let beatWidth = this.getW(1);
+		for(let x = this.getX(Math.floor(this.time)); x < this.canvas.width; x += beatWidth) {
 			this.graphics.moveTo(x, 0);
 			this.graphics.lineTo(x, this.canvas.height)
 		}
@@ -79,8 +81,8 @@ export class MidiRollCanvas implements MidiCanvas {
 		this.graphics.stroke()
 
 		this.graphics.beginPath()
-		let eigthWidth = this.getW(1/8);
-		for(let x = 0; x < this.canvas.width; x += eigthWidth) {
+		let eigthWidth = this.getW(.5);
+		for(let x = this.getX(Math.floor(this.time)); x < this.canvas.width; x += eigthWidth) {
 			this.graphics.moveTo(x, 0);
 			this.graphics.lineTo(x, this.canvas.height)
 		}
@@ -88,11 +90,11 @@ export class MidiRollCanvas implements MidiCanvas {
 		this.graphics.stroke()
 	}
 
-	getX(beat) { return this.getW(beat) }
-	getY(beat) { return this.getH(beat - this.minNote) }
-	getW(beats) { return beats * 4 * 60 }
-	getH(beats) {
+	private getX(beat: number) { return this.getW(beat - this.time) }
+	private getY(note: number) { return this.getH(note - this.minNote) }
+	private getW(beats: number) { return beats * 60 }
+	private getH(notes: number) {
 		let step = this.graphics.canvas.height / (this.maxNote - this.minNote);
-		return beats * step
+		return notes * step
 	}
 }
