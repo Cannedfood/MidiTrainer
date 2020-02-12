@@ -1,0 +1,23 @@
+{
+  "name": "midi-trainer",
+  "version": "1.0.0",
+  "description": "An application for practicing to a midi file",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "author": "Benno Straub",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/webmidi": "^2.0.4",
+    "cssnano": "^4.1.10",
+    "htmlnano": "^0.2.5",
+    "knockout": "^3.5.1",
+    "midi-parser-js": "^4.0.4",
+    "parcel-bundler": "^1.12.4",
+    "terser": "^4.6.3",
+    "typescript": "^3.7.5"
+  }
+}
