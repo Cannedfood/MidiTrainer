@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An application for practicing to a midi file",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cannedfood/MidiTrainer"
+  },
   "scripts": {
     "watch": "parcel src/index.html",
     "build": "parcel build src/index.html"
