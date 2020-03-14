@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.common.dev'
+import Vue from 'vue/dist/vue'
 
 export
 interface Toast {

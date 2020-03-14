@@ -1,6 +1,6 @@
 import Toasts from './Toasts'
 
-import Vue from 'vue/dist/vue.common.dev'
+import Vue from 'vue/dist/vue'
 
 export default
 class WebMidi {
