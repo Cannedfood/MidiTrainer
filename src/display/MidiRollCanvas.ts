@@ -1,9 +1,10 @@
 import { MidiCanvas } from './MidiCanvas'
 
 /// Draws midi data as
-export class MidiRollCanvas implements MidiCanvas {
-	time: number;
-	ticks_per_beat: number;
+export default
+class MidiRollCanvas implements MidiCanvas {
+	minTime: number;
+	maxTime: number;
 	minNote: number;
 	maxNote: number;
 
@@ -15,7 +16,8 @@ export class MidiRollCanvas implements MidiCanvas {
 		this.graphics = canvas.getContext("2d")
 		this.minNote = 0;
 		this.maxNote = 8;
-		this.time = 0;
+		this.minTime = 0;
+		this.maxTime = 4 * 3; // 3 Takte
 	}
 
 	beginFrame() {
@@ -25,7 +27,7 @@ export class MidiRollCanvas implements MidiCanvas {
 
 	endFrame() {
 		// Nothing to do
-		this.drawBeatGrid()
+		// this.drawBeatGrid()
 	}
 
 	drawMeasure(start, end, beatsPerMeasure) {
@@ -73,7 +75,10 @@ export class MidiRollCanvas implements MidiCanvas {
 	private drawBeatGrid() {
 		this.graphics.beginPath()
 		let beatWidth = this.getW(1);
-		for(let x = this.getX(Math.floor(this.time)); x < this.canvas.width; x += beatWidth) {
+		let lowestBeatX = this.getX(Math.ceil(this.minTime));
+		let highestBeatX = this.getX(Math.floor(this.maxTime));
+
+		for(let x = lowestBeatX; x < highestBeatX; x += beatWidth) {
 			this.graphics.moveTo(x, 0);
 			this.graphics.lineTo(x, this.canvas.height)
 		}
@@ -82,7 +87,7 @@ export class MidiRollCanvas implements MidiCanvas {
 
 		this.graphics.beginPath()
 		let eigthWidth = this.getW(.5);
-		for(let x = this.getX(Math.floor(this.time)); x < this.canvas.width; x += eigthWidth) {
+		for(let x = lowestBeatX; x < highestBeatX; x += eigthWidth) {
 			this.graphics.moveTo(x, 0);
 			this.graphics.lineTo(x, this.canvas.height)
 		}
@@ -90,9 +95,9 @@ export class MidiRollCanvas implements MidiCanvas {
 		this.graphics.stroke()
 	}
 
-	private getX(beat: number) { return this.getW(beat - this.time) }
+	private getX(beat: number) { return this.getW(beat - this.minTime) }
 	private getY(note: number) { return this.getH(note - this.minNote) }
-	private getW(beats: number) { return beats * 60 }
+	private getW(beats: number) { return (beats / (this.maxTime - this.minTime)) * this.canvas.width }
 	private getH(notes: number) {
 		let step = this.graphics.canvas.height / (this.maxNote - this.minNote);
 		return notes * step

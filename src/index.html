@@ -15,17 +15,42 @@
 </head>
 
 <body>
+	<div id="toasts">
+		<div
+			v-for="toast in toasts"
+			v-bind:class="{ 'alert-danger': toast.type == 'error', 'alert-warning': toast.type == 'warning', 'alert-info': toast.type == 'info' }"
+			class="alert alert-secondary">
+			<div>
+				<strong class="mr-auto">{{ toast.header }}</strong>
+			</div>
+			<div v-html="toast.message"></div>
+		</div>
+	</div>
+
 	<div id="root" class="container">
 		<div id="errors"></div>
 		<h1>MidiTrainer</h1>
 
 		<canvas id="midi-canvas" width="800" height="600"></canvas>
+	</div>
 
-		<input type="file" title="Open Midi File">
-		<select>
-			<option>Drums</option>
-			<option>Piano</option>
-		</select>
+	<div class="container">
+		<input id="midi-file-input" type="file" title="Open Midi File">
+	</div>
+
+	<div id="devices" class="container d-flex flex-row">
+		<div class="device-group">
+			<h3>Inputs</h3>
+			<div v-for="device in inputs">
+				<strong>{{ device.name }}</strong> <small>({{ [device.manufacturer, device.state, device.connection].filter(v=>v).join(', ') }})</small>
+			</div>
+		</div>
+		<div class="device-group">
+			<h3>Outputs</h3>
+			<div v-for="device in outputs">
+				<strong>{{ device.name }}</strong> <small>({{ [device.manufacturer, device.state, device.connection].filter(v=>v).join(', ') }})</small>
+			</div>
+		</div>
 	</div>
 
 	<script src="./index.ts"></script>

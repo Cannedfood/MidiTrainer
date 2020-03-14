@@ -1,0 +1,22 @@
+#toasts {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+}
+
+@keyframes toast-appear {
+	from { transform: translateY(100%); opacity: 10%;}
+	to   { transform: translateY(0); opacity: 100%;}
+}
+
+#toasts {
+	width: 25em;
+}
+#toasts>div {
+	animation: toast-appear .2s ease-out;
+	width: 100%;
+}
+
+.device-group {
+	margin: 1em;
+}

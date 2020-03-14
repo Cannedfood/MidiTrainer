@@ -4,20 +4,27 @@
   "description": "An application for practicing to a midi file",
   "main": "src/index.js",
   "scripts": {
-    "dev": "parcel src/index.html",
+    "watch": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
   "author": "Benno Straub",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "midi-parser-js": "^4.0.4",
+    "midievents": "^2.0.0",
+    "midifile": "^2.0.0",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4"
+  },
   "devDependencies": {
+    "@types/vue": "^2.0.0",
     "@types/webmidi": "^2.0.4",
+    "@vue/component-compiler-utils": "^3.1.1",
     "cssnano": "^4.1.10",
     "htmlnano": "^0.2.5",
-    "knockout": "^3.5.1",
-    "midi-parser-js": "^4.0.4",
     "parcel-bundler": "^1.12.4",
     "terser": "^4.6.3",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "vue-template-compiler": "^2.6.11"
   }
 }
