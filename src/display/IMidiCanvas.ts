@@ -1,5 +1,5 @@
 /// Provides an interface for drawing notes, for example as a piano roll or music sheet
-export interface MidiCanvas {
+export interface IMidiCanvas {
 	minTime: number; // The current time in ticks_per_beat
 	maxTime: number; // The current time in ticks_per_beat
 	minNote: number; // Minimum note the canvas has to draw

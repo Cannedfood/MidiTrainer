@@ -1,5 +1,4 @@
 import { MidiParser } from 'midi-parser-js'
-import MidiStream from './MidiStream';
 
 interface MidiNote {
 	start: number;
@@ -9,7 +8,7 @@ interface MidiNote {
 }
 
 export
-class MidiDataStream implements MidiStream {
+class MidiDataStream {
 	data: MidiData;
 	openNotes: Map<number, MidiNote>;
 

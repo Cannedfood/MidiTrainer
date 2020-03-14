@@ -1,8 +1,8 @@
-import { MidiCanvas } from './MidiCanvas'
+import { IMidiCanvas } from './IMidiCanvas'
 
 /// Draws midi data as
 export default
-class MidiRollCanvas implements MidiCanvas {
+class MidiRollCanvas implements IMidiCanvas {
 	minTime: number;
 	maxTime: number;
 	minNote: number;
