@@ -2,6 +2,8 @@
 
 A small single-page app for practicing drums, piano and other instruments with midi output.
 
+Try it online [HERE](https://cannedfood.github.io/MidiTrainer/)
+
 ## WIP
 
 This project is work in progress and is currently kind of useless.
