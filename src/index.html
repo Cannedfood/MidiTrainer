@@ -42,13 +42,13 @@
 		<div class="device-group">
 			<h3>Inputs</h3>
 			<div v-for="device in inputs">
-				<strong>{{ device.name }}</strong> <small>({{ [device.manufacturer, device.state, device.connection].filter(v=>v).join(', ') }})</small>
+				<strong>{{ device.name }}</strong> <small>{{ device.manufacturer?'('+device.manufacturer+')':'' }}</small>
 			</div>
 		</div>
 		<div class="device-group">
 			<h3>Outputs</h3>
 			<div v-for="device in outputs">
-				<strong>{{ device.name }}</strong> <small>({{ [device.manufacturer, device.state, device.connection].filter(v=>v).join(', ') }})</small>
+				<strong>{{ device.name }}</strong> <small>{{ device.manufacturer?'('+device.manufacturer+')':'' }}</small>
 			</div>
 		</div>
 	</div>

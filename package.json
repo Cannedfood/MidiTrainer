@@ -15,21 +15,18 @@
   "license": "ISC",
   "dependencies": {
     "midi-parser-js": "^4.0.4",
-    "midievents": "^2.0.0",
-    "midifile": "^2.0.0",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
-    "@types/vue": "^2.0.0",
     "@types/webmidi": "^2.0.4",
     "@vue/component-compiler-utils": "^3.1.1",
     "cssnano": "^4.1.10",
     "htmlnano": "^0.2.5",
+    "inline-source-cli": "^2.0.0",
     "parcel-bundler": "^1.12.4",
     "terser": "^4.6.3",
     "typescript": "^3.7.5",
-    "vue-template-compiler": "^2.6.11",
-    "inline-source-cli": "^2.0.0"
+    "vue-template-compiler": "^2.6.11"
   }
 }
