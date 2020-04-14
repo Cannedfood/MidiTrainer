@@ -11,13 +11,24 @@ class MidiRollCanvas implements IMidiCanvas {
 	canvas: HTMLCanvasElement;
 	graphics: CanvasRenderingContext2D;
 
+	noteColor: string;
+
 	constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 		this.graphics = canvas.getContext("2d")
 		this.minNote = 0;
 		this.maxNote = 8;
 		this.minTime = 0;
-		this.maxTime = 4 * 3; // 3 Takte
+		this.maxTime = 4 * 3; // 3 Measures
+
+		this.noteColor = "black";
+
+		// Set to correct resolution
+		let dpi = window.devicePixelRatio;
+		let style_height = +getComputedStyle(canvas).getPropertyValue("height").slice(0, -2);
+		let style_width  = +getComputedStyle(canvas).getPropertyValue("width" ).slice(0, -2);
+		canvas.setAttribute('height', `${style_height * dpi}`);
+		canvas.setAttribute('width',  `${style_width  * dpi}`);
 	}
 
 	beginFrame() {
@@ -30,7 +41,7 @@ class MidiRollCanvas implements IMidiCanvas {
 		// this.drawBeatGrid()
 	}
 
-	drawMeasure(start, end, beatsPerMeasure) {
+	drawMeasure(start: number, end: number, beatsPerMeasure: number) {
 		this.graphics.beginPath()
 
 		let startX = this.getX(start)
@@ -48,7 +59,9 @@ class MidiRollCanvas implements IMidiCanvas {
 	}
 
 	drawNote(note: number, position: number, duration: number) {
-		this.graphics.fillStyle = "gray";
+		this.graphics.fillStyle = this.noteColor;
+		console.log("Note at " + position + "ms for " + duration + "ms")
+		console.log("     x = " + this.getX(position) + " w = " + this.getW(duration))
 		this.graphics.fillRect(
 			this.getX(position), this.getY(note),
 			this.getW(duration), this.getH(1)
@@ -57,7 +70,7 @@ class MidiRollCanvas implements IMidiCanvas {
 
 	private clear() {
 		this.graphics.fillStyle = "black";
-		this.graphics.fillRect(0, 0, 1000, 1000)
+		this.graphics.fillRect(0, 0, this.canvas.width, this.canvas.height)
 	}
 
 	private drawNoteGrid() {

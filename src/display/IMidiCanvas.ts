@@ -5,6 +5,8 @@ export interface IMidiCanvas {
 	minNote: number; // Minimum note the canvas has to draw
 	maxNote: number; // Maximum note the canvas has to draw
 
+	noteColor: string;
+
 	beginFrame(): void;
 	drawMeasure(start: number, end: number, beatsPerMeasure: number): void;
 	drawNote(at: number, duration: number, value: number, data: any): void;

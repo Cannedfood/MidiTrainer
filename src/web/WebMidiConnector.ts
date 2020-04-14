@@ -3,7 +3,7 @@ import Toasts from './Toasts'
 import Vue from 'vue/dist/vue'
 
 export default
-class WebMidi {
+class WebMidiConnector {
 	private static model = new Vue({
 		el: "#devices",
 		data: {
@@ -51,7 +51,7 @@ class WebMidi {
 			return false;
 		}
 
-		return WebMidi.refreshDevices()
+		return WebMidiConnector.refreshDevices()
 	}
 
 	static refreshDevices(): boolean {
@@ -60,8 +60,8 @@ class WebMidi {
 				if(this.onMidiEvent) { this.onMidiEvent(e, input); }
 			}.bind(this);
 		});
-		WebMidi.model.inputs  = Array.from(this.midiAccess.inputs.values());
-		WebMidi.model.outputs = Array.from(this.midiAccess.outputs.values());
+		WebMidiConnector.model.inputs  = Array.from(this.midiAccess.inputs.values());
+		WebMidiConnector.model.outputs = Array.from(this.midiAccess.outputs.values());
 		return true;
 	}
 }

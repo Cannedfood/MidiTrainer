@@ -8,8 +8,7 @@
 	<title>Midi Trainer</title>
 
 	<!-- Bootstrap -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<link href="./index.css" rel="stylesheet">
 </head>
@@ -31,14 +30,15 @@
 		<div id="errors"></div>
 		<h1>MidiTrainer (WIP)</h1>
 		<small>This should be a standalone html page. Try right-click > Save Page As to use it offline! Source code on <a href="https://github.com/Cannedfood/MidiTrainer">GitHub</a></small>
-		<canvas id="midi-canvas" width="800" height="600"></canvas>
+		<canvas id="midi-canvas"></canvas>
+		<button onclick="toggleMidiCanvasFullscreen()">Fullscreen</button>
 	</div>
 
 	<div class="container">
 		<input id="midi-file-input" type="file" title="Open Midi File">
 	</div>
 
-	<div id="devices" class="container d-flex flex-row">
+	<div id="devices" class="container">
 		<div class="device-group">
 			<h3>Inputs</h3>
 			<div v-for="device in inputs">
@@ -51,6 +51,15 @@
 				<strong>{{ device.name }}</strong> <small>{{ device.manufacturer?'('+device.manufacturer+')':'' }}</small>
 			</div>
 		</div>
+	</div>
+
+	<div id="track-selection" class="container">
+		<h3>Tracks</h3>
+		<select v-model="selected_track">
+			<option v-for="track in tracks">
+				{{track.name}}
+			</option>
+		</select>
 	</div>
 
 	<script src="./index.ts"></script>
