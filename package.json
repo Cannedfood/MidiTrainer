@@ -9,7 +9,7 @@
   },
   "scripts": {
     "watch": "parcel src/index.html",
-    "build": "parcel build src/index.html && inline-source --attribute '' --compress false --root dist/ dist/index.html > index.html"
+    "build": "parcel build src/index.html && inline-source --attribute '' --root dist/ dist/index.html > index.html"
   },
   "author": "Benno Straub",
   "license": "ISC",
@@ -20,13 +20,15 @@
   },
   "devDependencies": {
     "@types/webmidi": "^2.0.4",
-    "@vue/component-compiler-utils": "^3.1.1",
+    "@vue/component-compiler-utils": "^3.1.2",
+    "bootstrap": "^4.4.1",
     "cssnano": "^4.1.10",
     "htmlnano": "^0.2.5",
     "inline-source-cli": "^2.0.0",
+    "midifile-ts": "^1.1.2",
     "parcel-bundler": "^1.12.4",
-    "terser": "^4.6.3",
-    "typescript": "^3.7.5",
-    "vue-template-compiler": "^2.6.11"
+    "parcel-plugin-purifycss": "^1.0.5",
+    "terser": "^4.6.11",
+    "typescript": "^3.7.5"
   }
 }
