@@ -9,7 +9,7 @@
   },
   "scripts": {
     "watch": "parcel src/index.html",
-    "build": "parcel build src/index.html && inline-source --attribute '' --root dist/ dist/index.html > index.html"
+    "build": "parcel build src/index.html && cp ./dist/index.html ./index.html"
   },
   "author": "Benno Straub",
   "license": "ISC",
@@ -24,9 +24,9 @@
     "bootstrap": "^4.4.1",
     "cssnano": "^4.1.10",
     "htmlnano": "^0.2.5",
-    "inline-source-cli": "^2.0.0",
     "midifile-ts": "^1.1.2",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-inliner": "^1.0.14",
     "parcel-plugin-purifycss": "^1.0.5",
     "terser": "^4.6.11",
     "typescript": "^3.7.5"

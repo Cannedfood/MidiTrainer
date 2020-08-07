@@ -29,4 +29,3 @@ For where a model-view binding is necessary we use `vue`.
 
 ## Notes/Ideas
 - [Prerender via parcel plugin?](https://github.com/ABuffSeagull/parcel-plugin-prerender)
-- Add [`parcel-plugin-inliner`](https://github.com/shff/parcel-plugin-inliner/issues/10) back in (Currently removed because it messes up `parcel watch`)
